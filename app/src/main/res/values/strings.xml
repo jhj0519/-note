@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Mine note</string>
+    <string name="year_mon_day">yyyy mm dd</string>
+</resources>

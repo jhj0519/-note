@@ -1,15 +1,18 @@
 package com.example.evernote;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
+    Button btnAdd;
 
     List<Memo> memoList;
     @Override
@@ -28,18 +32,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         memoList =new ArrayList<>();
-        memoList.add(new Memo("test1","test11",0));
-        memoList.add(new Memo("test2","test22",1));
-        memoList.add(new Memo("test3","test33",0));
-        memoList.add(new Memo("test4","test44",1));
 
         recyclerView = findViewById(R.id.Recycle);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerAdapter = new RecyclerAdapter(memoList);
         recyclerView.setAdapter(recyclerAdapter);
+        btnAdd = findViewById(R.id.btn_add);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( MainActivity.this,AddActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
     }
+
+    //onactivityresu
+    //startActicityForResult으로 실행한 액티비티가 끝났을 때, 여기에서 데이터를 받는다.
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 0){
+            String strMain = data.
+
+        }
+    }
+
     //Adapter사용
     class  RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
         private List<Memo> listdata;

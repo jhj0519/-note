@@ -1,8 +1,8 @@
 package com.example.evernote;
 
 public class Memo {
-    String title;
-    String text;
+    String title;//제목
+    String text;//본문
     int isdone;//상태표시
 
     //단축키 alt + insert

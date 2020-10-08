@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 public class AddActivity extends AppCompatActivity {
 
     EditText editText;
+    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +41,20 @@ public class AddActivity extends AppCompatActivity {
 
                     finish();
 
-                    Toast.makeText(AddActivity.this, str + "," + substr, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, "day:" + substr, Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
 
-        findViewById(R.id.btn_content).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void  onClick(View v){
+                Intent intent = new Intent(AddActivity.this,MainActivity.class);
+                startActivityForResult(intent,0);
             }
         });
+
+
     }
 }

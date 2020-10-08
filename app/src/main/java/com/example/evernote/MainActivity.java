@@ -57,7 +57,12 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 0){
-            String strMain = data.
+            String strMain = data.getStringExtra("main");
+            String strSub = data.getStringExtra("sub");
+
+            Memo memo = new Memo(strMain,strSub, 0);
+            recyclerAdapter.addItem((memo));
+            recyclerAdapter.notifyDataSetChanged();
 
         }
     }

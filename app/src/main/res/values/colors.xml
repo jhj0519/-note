@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#70D4F3</color>
-    <color name="colorPrimaryDark">#6DC6D1</color>
-    <color name="colorAccent">#00BCD4</color>
-    <color name="black">#000000</color>
+     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="sky">#C3E0F6</color>
+    <color name="banila">#FAFBD5</color>
+    <color name="kakiS">#D1E8C9</color>
+    <color name="kakiM">#99C8BC</color>
+    <color name="kakiL">#64979D</color>
+    <color name="kakiBlack">#5E5C68</color>
 </resources>

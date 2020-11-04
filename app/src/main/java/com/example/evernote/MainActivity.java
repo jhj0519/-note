@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    SQLiteHelper dbHelper;
+
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
     Button btnAdd;
@@ -31,7 +34,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        memoList =new ArrayList<>();
+        dbHelper = new SQLiteHelper(MainActivity.this);
+        //memoList = dbHelper.selectAll();
+
+        memoList = new ArrayList<>();
+       // memoList = dbHelper.selectAll();
 
         recyclerView = findViewById(R.id.Recycle);
 
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerAdapter = new RecyclerAdapter(memoList);
         recyclerView.setAdapter(recyclerAdapter);
         btnAdd = findViewById(R.id.btn_add);
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +69,10 @@ public class MainActivity extends AppCompatActivity {
             String strSub = data.getStringExtra("sub");
 
             Memo memo = new Memo(strMain,strSub, 0);
-            recyclerAdapter.addItem((memo));
+            recyclerAdapter.addItem(memo);
             recyclerAdapter.notifyDataSetChanged();
+
+            //dbHelper.insertMemo(memo);
 
         }
     }
@@ -93,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         itemViewHolder.title.setText(memo.getTitle());
         itemViewHolder.text.setText(memo.getText());
         if(memo.getIndone() == 0 ){
-            itemViewHolder.img.setBackgroundColor(Color.YELLOW);
+            itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
         }else if (memo.getIndone() == 1){
             itemViewHolder.img.setBackgroundColor(Color.BLACK);
         }
@@ -122,5 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
       }
     }
+
     }
 }

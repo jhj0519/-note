@@ -23,10 +23,15 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        editText = findViewById(R.id.ediMemo);
+        Init();
+        SetLestener();
 
-        findViewById(R.id.btn_done).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+    }
+    public void  SetLestener(){
+
+        //findViewById(R.id.btn_done).setOnClickListener(new View.OnClickListener() {
+        editText.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view){
                 String str = editText.getText().toString();
 
                 if(str.length() > 0){
@@ -47,7 +52,7 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void  onClick(View v){
                 Intent intent = new Intent(AddActivity.this,MainActivity.class);
@@ -55,6 +60,9 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
-
+    }
+    private void Init(){
+        editText = findViewById(R.id.ediMemo);
+        btnBack = findViewById(R.id.btn_back);
     }
 }

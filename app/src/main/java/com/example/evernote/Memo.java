@@ -1,9 +1,18 @@
 package com.example.evernote;
 
 public class Memo {
+
+    int seq;
     String title;//제목
     String text;//본문
     int isdone;//상태표시
+
+    public Memo(int seq, String title, String text, int isdone) {
+        this.seq = seq;
+        this.title = title;
+        this.text = text;
+        this.isdone = isdone;
+    }
 
     //단축키 alt + insert
     //생성자
@@ -11,6 +20,15 @@ public class Memo {
         this.title = title;
         this.text = text;
         this.isdone = isdone;
+    }
+
+
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
     public String getTitle() {

@@ -27,6 +27,7 @@ public class SQLiteHelper {
         db = opener.getWritableDatabase();
     }
 
+
     private class OperHelper extends SQLiteOpenHelper{
 
         public OperHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version){
@@ -36,9 +37,8 @@ public class SQLiteHelper {
 
         public void onCreate(SQLiteDatabase db) {
             String create = "CREATE TABLE " + table1 + "("+
-                    "seq integer PRIMARY KEY AUTOINCREMENT, " + "maintext text," +
-                    "subtext text," + "indone integer)";
-                db.execSQL(create);
+                    "seq integer PRIMARY KEY AUTOINCREMENT, " + "titletext text, " +
+                    "text text )";
             db.execSQL(create);
         }
 
@@ -47,27 +47,17 @@ public class SQLiteHelper {
             db.execSQL("DROP TABLE IF EXISTS "+table1);
             onCreate(db);
         }
-//        @Override
-//        public void onCreate(SQLiteDatabase sqLiteDatabase){
-//            String create = "CREATE TABLE" + table1 + "("+
-//                    "seq integer PRIMARY KEY AUTOINCREMENT, " + "maintext," +
-//                    "subtext text," + "indone integer)";
-//            sqLiteDatabase.execSQL(create);
-//        }
-//
-//        public void  onUpgrade(SQLiteDatabase sqLiteDatabase, int i , int i1){
-//
-//        }
+    }
         public void insertMemo(Memo memo){
-            // INSERT INTO MemoTable VALUES(NULL, 'TITLE', 'TEXT',0); 쿼리문 원래 모양
-            String sql = "INSERT INTO " + table1 + "VALUES(NULL, '" + memo.title+"', '" + memo.text+"', " +memo.getIndone() + ");";
+            // INSERT INTO MemoTable VALUES(NULL, 'TITLE', 'TEXT'); 쿼리문 원래 모양
+            String sql = "INSERT INTO " + table1 + "VALUES(NULL, '" + memo.title+"', '" + memo.text + ");";
             db.execSQL(sql);
         }
 
         //MemoTable의 0번쨰 데이터를 삭제
         //DELETE FROM MemoTable WHERE seq = 0;
         public void  deleteMemo(int position){
-            String sql = "DELLTE FROM " + table1 + "WHERE seq = " +position + ";";
+            String sql = "DELETE FROM " + table1 + " WHERE seq = " + "0;";
             db.execSQL(sql);
         }
 
@@ -81,14 +71,15 @@ public class SQLiteHelper {
             results.moveToFirst();
 
             while (!results.isAfterLast()){
-                Memo memo = new Memo(results.getInt(0) ,results.getString(1),results.getString(2),results.getInt(3));
+                Memo memo = new Memo(results.getInt(0) ,results.getString(1),
+                        results.getString(2));
                 list.add(memo);
                 results.moveToNext();
             }
             results.close();
             return list;
 
-        }
+
     }
 
 

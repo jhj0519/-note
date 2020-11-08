@@ -15,13 +15,14 @@ import java.util.Date;
 
 public class AddActivity extends AppCompatActivity {
 
-    EditText editText;
-    Button btnBack;
+    EditText titleText, memoText;
+    Button btnBack, btnSave;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_memo);
 
         Init();
         SetLestener();
@@ -30,39 +31,48 @@ public class AddActivity extends AppCompatActivity {
     public void  SetLestener(){
 
         //findViewById(R.id.btn_done).setOnClickListener(new View.OnClickListener() {
-        editText.setOnClickListener(new View.OnClickListener() {
+        titleText.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view){
-                String str = editText.getText().toString();
+                String title = titleText.getText().toString();
+                String memo = memoText.getText().toString();
 
-                if(str.length() > 0){
+                if(title.length() > 0||memo.length()>0){
                     Date data = new Date();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy - MM - dd");
-                    String substr= sdf.format(data);
+                    String dayData= sdf.format(data);
 
-                    Intent intent = new Intent();
-                    intent.putExtra("main", str);
-                    intent.putExtra("sub",substr);
+                    intent = new Intent();
+                    intent.putExtra("title", title);
+                    intent.putExtra("text",memo);
                     setResult(RESULT_OK,intent);
 
                     finish();
+                    //makeMessege
 
-                    Toast.makeText(AddActivity.this, "day:" + substr, Toast.LENGTH_SHORT).show();
-
-                }
+                    }
             }
         });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void  onClick(View v){
-                Intent intent = new Intent(AddActivity.this,MainActivity.class);
+            public void onClick(View v){
+                intent = new Intent(AddActivity.this, MainActivity.class);
                 startActivityForResult(intent,0);
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(AddActivity.this,MainActivity.class);
             }
         });
 
     }
     private void Init(){
-        editText = findViewById(R.id.ediMemo);
-        btnBack = findViewById(R.id.btn_back);
+        titleText = findViewById(R.id.btn_memo_tatle);
+        memoText = findViewById(R.id.btn_memo_memo);
+        btnBack = findViewById(R.id.btn_cancel);
+        btnSave = findViewById(R.id.btn_save);
     }
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,10 +37,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new SQLiteHelper(MainActivity.this);
-        //memoList = dbHelper.selectAll();
 
         memoList = new ArrayList<>();
-       // memoList = dbHelper.selectAll();
+        memoList = dbHelper.selectAll();
 
         recyclerView = findViewById(R.id.Recycle);
 
@@ -52,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( MainActivity.this,AddActivity.class);
-                startActivityForResult(intent,0);
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivityForResult(intent, 0);
             }
         });
-    }
 
+    }
     //onactivityresu
     //startActicityForResult으로 실행한 액티비티가 끝났을 때, 여기에서 데이터를 받는다.
     @Override
@@ -65,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 0){
-            String strMain = data.getStringExtra("main");
-            String strSub = data.getStringExtra("sub");
+            String strTitle = data.getStringExtra("title");
+            String strText = data.getStringExtra("text");
 
-            Memo memo = new Memo(strMain,strSub, 0);
+            Memo memo = new Memo(strTitle, strText);
             recyclerAdapter.addItem(memo);
             recyclerAdapter.notifyDataSetChanged();
 
-            //dbHelper.insertMemo(memo);
+           dbHelper.insertMemo(memo);
 
         }
     }
@@ -102,18 +103,14 @@ public class MainActivity extends AppCompatActivity {
 
         itemViewHolder.title.setText(memo.getTitle());
         itemViewHolder.text.setText(memo.getText());
-        if(memo.getIndone() == 0 ){
-            itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
-        }else if (memo.getIndone() == 1){
-            itemViewHolder.img.setBackgroundColor(Color.BLACK);
-        }
+
     }
 
     //리스트를 추가, 제거하는 함수
         void addItem(Memo memo){
         listdata.add(memo);
         }
-        void  removeItem(int position){
+        void removeItem(int position){
         listdata.remove(position);
         }
 
@@ -121,14 +118,12 @@ public class MainActivity extends AppCompatActivity {
     class ItemViewHolder extends RecyclerView.ViewHolder{
       private TextView title;
       private TextView text;
-      private ImageView img;
 
       public ItemViewHolder(@NonNull View itemView){
           super(itemView);
 
           title= itemView.findViewById(R.id.list_title);
           text = itemView.findViewById(R.id.list_text);
-          img = itemView.findViewById(R.id.list_Image);
 
       }
     }

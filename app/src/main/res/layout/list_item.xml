@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    android:background="@color/kakiL">
+    android:background="@color/kakiBlack"
+ >
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -17,23 +18,17 @@
             android:id="@+id/list_title"
             android:text="Title"
             android:textSize="16sp"
-            android:layout_weight="1"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:padding="10dp"
             />
-        <ImageView
-            android:id="@+id/list_Image"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@color/kakiM"
+        <TextView
+            android:id="@+id/list_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
             />
     </LinearLayout>
-    <TextView
-        android:id="@+id/list_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@color/banila"
-        />
+
     
 </LinearLayout>

@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivityForResult(intent, 0);
+                Intent intent = new Intent(MainActivity.this, MemoActivity.class);
+                startActivityForResult(intent,0);
             }
         });
 
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Adapter사용
     class  RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
-        private List<Memo> listdata;
+    private List<Memo> listdata;
     public RecyclerAdapter(List<Memo> listdata){
         this.listdata =listdata;
     }

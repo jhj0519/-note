@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddActivity extends AppCompatActivity {
+public class MemoActivity extends AppCompatActivity {
 
     EditText titleText, memoText;
     Button btnBack, btnSave;
@@ -22,6 +23,9 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //상단바 제거
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_memo);
 
         Init();
@@ -56,7 +60,7 @@ public class AddActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                intent = new Intent(AddActivity.this, MainActivity.class);
+                intent = new Intent(MemoActivity.this, MainActivity.class);
                 startActivityForResult(intent,0);
             }
         });
@@ -64,7 +68,7 @@ public class AddActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(AddActivity.this,MainActivity.class);
+                startActivityForResult(new Intent(MemoActivity.this,MainActivity.class),0);
             }
         });
 
